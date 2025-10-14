@@ -1,0 +1,101 @@
+h1{
+
+    color: blue
+}
+
+h2{   /*元素选择器*/
+    color: purple;
+}
+
+#products_name{ /*id选择器*/
+    font-size: 25px;
+    font-weight: bolder;
+    color: white;
+}
+.price{/*class选择器*/
+    font-size: 22px;
+    color: yellow;
+}
+*{   /*通配符选择器*/
+    font-family: "kaiti";/*字体*/
+}
+.father>.son{/*子元素选择器*/
+    color: red;
+    font-size: 26px ;
+}
+.father .grandson{/*后代元素选择器*/
+    color: orange;
+    font-size: 24px ;
+}
+h3+p{/*相邻兄弟选择器*/
+    color: brown;
+    font-size: 20px ;
+}
+#touch:hover{/*鼠标悬停选择器*//*伪类选择器*/
+    color: red;
+    font-size: 30px ;
+    background-color: yellow;
+}
+/* ::after{
+    content: "这是一个测试程序";
+    color: red;
+    font-size: 20px ;
+} */
+.nan{
+    color:goldenrod;
+}
+
+#drawing_border{   
+    background-color: gold;
+    border-style: solid dashed double dotted;
+    border-top-color: blue;
+    height: 300px;/*style内部用这种注释方法*/
+    width: 400px;
+    border-width:5px;
+    border-left-color: blueviolet;
+    border-top-width: 3px;
+    padding: 60px;/*内边距，只有四个方向的距离，无颜色*/
+    margin: 30px;/*外边距，只有四个方向的距离，无颜色*/
+    
+}
+.floating{
+    background-color: rgb(221, 255, 0);
+    height: 200px;
+    width: 350px;
+}
+.left_floating{
+    width: 60px;
+    height: 60px;
+    background-color: green;
+    float: left;/*浮动*/
+}
+.right_floating{
+    width: 50px;
+    height: 50px;
+    background-color: blueviolet;
+    float:right;/*浮动*/
+}
+.floating1{
+    background-color: rgb(115, 0, 255);
+    width: 300px;
+    border: 3px black solid;
+    overflow: hidden;/*超过时，撑开*/
+}
+.left_floating1{
+    width: 60px;
+    height: 60px;
+    background-color: rgb(0, 149, 255);
+    float: left;/*浮动*/
+}
+.right_floating1{
+    width: 50px;
+    height: 50px;
+    background-color: rgb(255, 0, 8);
+    float:right;/*浮动*/
+}
+#jiaran_heu{
+    width: 100px;
+    position: fixed;
+    right: 0px;
+    top: 0px;
+}
