@@ -3,31 +3,292 @@
 <head>
     <meta charset="UTF-8">
     <title>NANの博客</title><!--在这里写标签页选项卡的标题-->
+    <link rel="stylesheet" href="css/style.css"><!--link表示链接外部文件，rel表示关系，stylesheet表示样式表，href表示文件路径-->
+    <!--drawing_border中border盒子的用法-->
+    <style>
+        .playbox{
+            width: 300px;
+            height: 200px;
+            background-color: fuchsia;
+            border: 3px black solid;
+            overflow: hidden;
+            border: solid 3px green;
+            position: relative;
+        }
+        .boxnormal{
+            width: 30px;
+            height: 30px;
+            background-color: greenyellow;
+        }
+        /* 通过position对盒子进行移动，相对定位*/
+        .boxrelative{
+            width: 30px;
+            height: 30px;
+            background-color: blue;
+            position: relative;
+            left: 4px;
+            top: 5px;
+            
+        }
+
+        #testpoint{
+            width: 100px;
+            height: 30px;
+            font-size: 16px;
+            background-color: aqua;
+        }
+  
+        /* absolute绝对定位，其脱离文档流，
+        绑定对应的父类，以最近的父类相参照
+        文件中生成自动跳过，下面的色块相应上浮 */
+        .absolute{
+            width: 30px;
+            height: 30px;
+            background-color: rgb(255, 0, 115);
+            position: absolute;
+            left: 40px;
+            bottom: 40px;
+            /* 如果移动超过父类定义的边框，则会造成溢出,父类要有position:relative*/
+        }
+        .boxfixed{
+            width: 100px;
+            height: 100px;
+            background-color: rgb(98, 0, 255);
+            position: fixed;
+            right: 300px;
+            top: 300px;
+        }
+        .advertise{
+            position: fixed;
+            right: 0px;
+            top: 100px;
+        }
+        .alert_button{
+            width: 100px;
+            height: 30px;
+            background-color: blue;
+        }
+        #secret_table{
+            width: 100%;
+            border-collapse: collapse;
+            text-align: center;
+            /* border-collapse表示边框是否合并 collapse为合并 separate为不合并*/
+            padding: 6px;
+            margin-top: 10px;
+            border: 2px solid black;
+        }
+        #secret_table_head{
+            background-color: lightgray;
+        }
+        #diagramm{
+            text-align: center;
+            /* text-align表示文字对齐方式 center为居中 left为左对齐 right为右对齐*/
+        }
+        th{
+            border: 1px solid black;
+            padding: 6px;
+        }
+        td{
+            border: 1px solid black;
+            padding: 6px;
+        }
+    </style>
+    <script>
+        console.log('你好，head');
+    </script>
+    <script src="./js/myscripe.js"></script>
 </head>
 <body>
+    <script>
+        console.log('hellow,body');
+        // 用alert来弹窗
+        /**alert('你好，内联样式弹窗');**/
+        // null表示被赋值为空，该值不存在。undesign表示没有被赋值
+        var x;
+        // x = 4;
+        let y = 5;
+        const z = 2.72;
+        console.log(x,y,z);
+        let name = 'NAN';
+        let kongzhi = null;
+        console.log(name,kongzhi);
+        let grade = 3;
+        if(grade > 3){
+            console.log('已毕业');
+        }
+        else{
+            console.log('未毕业');
+        }
+        for(let j = 0;j <10; j++){
+            console.log(j);
+        }
+        let i = 3;
+        while(i<=6)
+        {
+            
+            i++
+            console.log(i);
+        }
+        while(1)
+        {
+            
+            i++
+            if(i>=9 && i<12){
+                continue;
+            }
+            console.log(i);
+            if(i == 15){
+                break;
+            }
+        
+        }
+    </script>
+    <script>
+        function eat_food(food){
+            console.log('我喜欢吃'+food);
+            //函数内声明局部变量
+            let food1 = '汉堡';
+            return '你喜欢吃'+food+'和'+food1;
+        }
+        //函数外声明全局变量
+        let food = '炸鸡';
+        let result = eat_food(food);
+        console.log(result);
+
+    </script>
+    <div class="button_title">
+        <button class="alert_button" onclick="click_alert('按钮1')">
+            点击这里触发弹窗
+        </button>
+        <button class="alert_button" onclick="click_alert('按钮1')">
+            点击这里触发弹窗
+        </button><br>
+        <button class="alert_button" onclick="click_alert('按钮1')">
+            点击这里触发弹窗
+        </button>
+    </div>
+    <div id="test_tilte">测试DOM
+        <button id="testpoint" onclick="change_button()">变化案件</button>
+    </div>
+    <script>
+        // DOM文档对象模型
+        // document表示整个网页
+        // 无法寻找未出现的元素（寻找的元素在script前面）
+        let doc_class = document.getElementsByClassName("alert_button");
+        console.log(doc_class);
+        let doc_tag = document.getElementsByTagName("button");
+        console.log(doc_tag);
+        let doc_tag_2 = document.getElementsByTagName("button")[2];
+        
+        console.log(doc_tag_2);
+        console.log(doc_tag_2.innerHTML);// innerHTML表示标签内的内容
+        let doc_id = document.getElementById("testpoint");
+        console.log(doc_id);
+        doc_id.addEventListener('click',change_on);// 监听事件,change_on为函数名,后面不加括号
+        
+
+    </script>
+    
+    <div class='focus_board'>
+        <marquee behavior="scroll" direction="left" scrollamount="10"
+        onmouseover="this.stop()" onmouseout="this.start()">
+            欢迎来到NANの博客，敬请期待更多内容，请记住网址www.NANNAN-13.gihub.io
+        </marquee>
+        <!--marquee表示滚动字幕 behavior表示滚动方式，scroll为正常滚动，slide为滑动，alternate为来回滚动 direction表示滚动方向 scrollamount表示滚动速度 onmouseover鼠标悬停时触发事件 onmouseout鼠标移开时触发事件-->
+        <input type="text" onfocus="inside_element('输入框')" onblur="outside_element('输入框')" 
+            placeholder="请输入用户名" maxlength="10" size="20" >
+        <input type="password" placeholder="请输入密码" maxlength="10" size="20">
+        <!--input表示输入框 type表示输入框类型 text为文本框 password为密码框 checkbox为复选框 radio为单选框 onfocus鼠标点击时触发事件 onblur鼠标移开时触发事件-->
+    </div>
     <div>
+
         <h1>欢迎来到NANの博客</h1>
         <h2>关注微信公众号：萨维亚萨钦</h2>
         <h3>敬请期待更多内容</h3>
 
         <!--h表示标题，h后面的数字表示标题是积极标题，数字越高字体越小-->
+    
     </div>
-    <div style="background-color:green;">
+    <div class="playbox">
+        <div class="boxnormal">99</div>
+        <div class="boxrelative">88</div>
+        <div class="boxnormal">99</div>
+        <div class="absolute">63</div>
+        <div class="boxnormal">77</div>
+        <div class="boxnormal">89</div>
+        <!-- <div class="boxfixed">kk</div> -->
+        <div class="boxnormal">65</div>
+    </div>
+    <div class="father">
+        <p class="son">
+            敬请期待更多内容
+        </p>
+        <div class="grandson">
+            jingqingqidai gengduo neirong
+        </div>
+
+    </div>
+    <span style="background-color: blueviolet;">
+        building <br>
+    </span>
+    <span style="background-color: chartreuse;">
+        正在建设中
+    </span>
+    <div>
+        <div class="floating"><!--左右浮动自动填充-->
+            <div class="left_floating">33</div>
+            <div class="right_floating">22</div>
+            <div class="left_floating">33</div>
+            <div class="right_floating">22</div>
+            <div class="left_floating">33</div>
+            <div class="right_floating">22</div>
+            <div class="left_floating">33</div>
+            <div class="right_floating">22</div>
+        </div>
+    </div>
+    <div class="floating1">
+        <div class="left_floating1">44</div>
+        <div class="right_floating1">55</div>
+        <div class="left_floating1">44</div>
+        <div class="right_floating1">55</div>
+        <div class="left_floating1">44</div>
+        <div class="right_floating1">55</div>
+    </div>
+    <div id="drawing_border">
+        这是一个边框
+    </div>
+    <div class="nan" style="display: inline-block; background-color:green;">
+       
+        <h3>
+            现在处于测试阶段
+        </h3>
         <p>
+            欢迎各位大佬前来指点
+        </p>
+        <p id="products_name" style="color: blueviolet;">
             这是一个测试程序（确信
         </p>
-        <p>
+        
+        <p class="price">
             该网站用于电子学学习交流
         </p>
+        <div id="touch">
+            联系方式：18518683677
+        </div>
+    </div>
+    <div>
+
     </div>
     <div>
         <p class="text">文字<b class="text">字符</b>文字<i>shuzi</i>文字文字<br></br>文字<u>下划线</u></p>
         <!--br可强制换行，或者新一行的p来换行 -->
         <!--b中间的加粗，i中间的为斜体，u中间的加下划线-->
         <!--class可以标记所包含东西的类，方便寻找-->
-        <p>wenziwenziwenzi</p>
+        <p>wenziwenziwenzi</p><br>
     </div>
-    
+    <div>
+        <h1 style="color: lawngreen;font: bolder 50px 'kaiti' ">以下为链接 </h1><br>
+    </div>
     <span style="background-color:red;">
         <a href="http://nhlwgjgnhgygjgwl.nhgyg.cn/col.jsp?id=112" target="_blank">
             经书资料
@@ -40,13 +301,16 @@
 
     </span>
     <!--div和span均为容器，用于对网站中的数据进行批量操作。div操作整行而span只操作占用的位置-->
-
+    <div class="advertise">
+        <img src="Goatman.jpg" alt="" width="100px" onclick="click_alert('广告窗1')">
+    </div>
     <span style="background-color: aliceblue;">
         <img src="https://ppcimg.csd02.cn/thumb/up/2015-7/201573093148_600_0.jpg" alt="神的使者" width="450px"><br>
-        <img src="HEU_JiaRan.jpg" alt="示例图片"><br>
+        <img src="Goatman.jpg" alt="Savyasachin" width="500px" onclick="click_alert('羊头人')"><br>
+        <img src="HEU_JiaRan.jpg" alt="示例图片" id="jiaran_heu"><br>
         <!--用img来标定图片 alt为图片无法加载时的替代文本,width表示宽度（...px）height同理-->
         <img src="HEU_JiaRan.jpg" alt="示例图片2" width="500px" height="400px">
-        <img src="D:\pythonProject\exp2\result_image2.jpg" alt="实验照片" width="400">
+        <!-- <img src="D:\pythonProject\exp2\result_image2.jpg" alt="实验照片" width="400"> -->
         <!--只改w和h的其中一个则会等比例缩小-->
         <br>
         <a href="https://space.bilibili.com/2037746848" target="_blank">
@@ -68,25 +332,38 @@
         <li>其他</li>
     </ul>
     <!--ul表示无序列表，列表中每行用li，在显示上每列前显示‘·’而非数字-->
-    <table border="2">
-        <thead>
-            <tr>
-                <td>表头0</td>
-                <td>表头1</td>
-                <td>表头2</td>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>1111</td>
-                <td>1122</td>
-            </tr>
-            <tr>
-                <td>2211</td>
-                <td>2222</td>
-            </tr>
-        </tbody>
-    </table>
+    <div>
+        <h1 id="diagramm">TODO List</h1>
+        <button onclick="add_line('添加任务')">
+                添加信息
+        </button>
+        <table id="secret_table">
+            <thead id="secret_table_head">
+                <tr>
+                    <th><b>序号</b></th>
+                    <th>任务</th>
+                    <th>结束时间</th>
+                    <th>目标</th>
+                    <th>修改</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>吃饭</td>
+                    <td>每天</td>
+                    <td>吃饱</td>
+                    <td><button onclick="modify_button()">修改</button>
+                        <button onclick="delete_button()">删除</button></td>
+                </tr>
+                
+            </tbody>
+        </table>
+        <script src="./js/todo_list_script.js">
+            
+        </script>
+    </div>
+
     <!--table表示表格，thead表示表头，tbody表示表的主体，tr表示行，td表示单元格中的内容-->
 </body>
 </html>
