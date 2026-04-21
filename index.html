@@ -833,7 +833,52 @@
         a {
             text-decoration: none;
         }
+        /* 奖励与荣誉网格 */
+        .honors-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 1rem;
+        }
 
+        .honor-card {
+            background: #ffffff;
+            border-radius: 1rem;
+            padding: 0.8rem 1.2rem;
+            border: 1px solid #eef2f8;
+            transition: all 0.2s;
+        }
+
+        .honor-card:hover {
+            border-color: #cbdde9;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .honor-name {
+            font-weight: 600;
+            color: #1f2e3c;
+            font-size: 0.9rem;
+        }
+
+        .honor-detail {
+            font-size: 0.75rem;
+            color: #2c7da0;
+            margin-top: 0.25rem;
+        }
+
+        /* 深色模式适配 */
+        .dark-mode .honor-card {
+            background: #253141;
+            border-color: #334155;
+        }
+
+        .dark-mode .honor-name {
+            color: #e2e8f0;
+        }
+
+        .dark-mode .honor-detail {
+            color: #8bbcdb;
+        }
         /* ========== 手动深色模式（通过 .dark-mode 类控制）========== */
         .dark-mode body {
             background: linear-gradient(145deg, #10161e 0%, #0a0f15 100%);
@@ -1078,7 +1123,7 @@
                     <div class="info">
                         <div class="name">李锦男 Li Jinnan</div>
                         <div class="tagline">
-                            <i class="fas fa-laptop-code" style="color:#2c7da0;"></i> 全栈研究者 · 技术创作者 · 浪漫主义者
+                            <i class="fas fa-laptop-code" style="color:#2c7da0;"></i> 硬件与算法研究者 · 全栈开发者 · 浪漫主义者
                         </div>
                         <div class="detail-list">
                             <div class="detail-item">
@@ -1292,7 +1337,60 @@
                         </div>
                     </div>
                 </div>
-
+                <!-- 奖励与荣誉 -->
+                <div class="section">
+                    <div class="section-title">
+                        <i class="fas fa-trophy"></i>
+                        <span>奖励＆荣誉</span>
+                    </div>
+                    <div class="honors-grid">
+                        <!-- 每个奖项为一个卡片 -->
+                        
+                        <div class="honor-card">
+                            <div class="honor-name">全国大学生数学建模竞赛 省级二等奖</div>
+                            <div class="honor-detail">2025.11</div>
+                        </div>
+                        <div class="honor-card">
+                            <div class="honor-name">全国大学生数学竞赛 省级三等奖</div>
+                            <div class="honor-detail">2025.11</div>
+                        </div>
+                        <div class="honor-card">
+                            <div class="honor-name">全国大学生电子设计竞赛 省级二等奖</div>
+                            <div class="honor-detail">2025.08</div>
+                        </div>
+                        <div class="honor-card">
+                            <div class="honor-name">大唐杯新一代通信技术竞赛 省级三等奖</div>
+                            <div class="honor-detail">2025.05</div>
+                        </div>
+                        <div class="honor-card">
+                            <div class="honor-name">黑龙江省大学生电子设计竞赛 省级三等奖</div>
+                            <div class="honor-detail">2024.08</div>
+                        </div>
+                        <div class="honor-card">
+                            <div class="honor-name">校级五四杯科研竞赛二等奖</div>
+                            <div class="honor-detail">2025.12</div>
+                        </div>
+                        <div class="honor-card">
+                            <div class="honor-name">校一等奖学金</div>
+                            <div class="honor-detail">两次</div>
+                        </div>
+                        <div class="honor-card">
+                            <div class="honor-name">校二等奖学金</div>
+                            <div class="honor-detail">两次</div>
+                        </div>
+                        <div class="honor-card">
+                            <div class="honor-name">校散打俱乐部 2024 年度冠军</div>
+                        </div>
+                        <div class="honor-card">
+                            <div class="honor-name">燕园杯历史征文竞赛 北京市一等奖</div>
+                            <div class="honor-detail">2022.07</div>
+                        </div>
+                        <div class="honor-card">
+                            <div class="honor-name">全国高中生奥林匹克化学竞赛 北京市一等奖</div>
+                            <div class="honor-detail">2021.05</div>
+                        </div>
+                    </div>
+                </div>
                 <!-- 页脚 -->
                 <div class="footer">
                     <span><i class="far fa-copyright"></i> 2026 李锦男 · 灵感与创造</span>
@@ -1331,6 +1429,7 @@
             </div>
         </div>
     </div>
+    
 </div>
 
 <!-- 右下角主题切换按钮 -->
