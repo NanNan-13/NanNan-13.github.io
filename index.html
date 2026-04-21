@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>李锦男 · 个人主页 | 开发者与创作者</title>
-    <!-- 引入 Font Awesome 6 (免费图标库) -->
+    <title>李锦男 · 个人主页 | 研究者与开发者</title>
+    <!-- 引入 Font Awesome 6 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         * {
@@ -19,22 +19,140 @@
             line-height: 1.5;
             color: #1e2a3e;
             padding: 2rem 1.5rem;
+            transition: background 0.3s ease, color 0.2s ease;
         }
 
-        /* 平滑滚动与容器 */
-        .container {
-            max-width: 1100px;
+        /* 左右布局 */
+        .layout {
+            display: flex;
+            gap: 2rem;
+            align-items: flex-start;
+            max-width: 1400px;
             margin: 0 auto;
+            padding: 0 1rem;
         }
 
-        /* 主卡片 */
+        .main-content {
+            flex: 1;
+            min-width: 0;
+        }
+
+        /* 右侧悬浮窗 */
+        .sidebar {
+            width: 280px;
+            flex-shrink: 0;
+            position: sticky;
+            top: 2rem;
+            align-self: flex-start;
+        }
+
+        .sidebar-card {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(2px);
+            border-radius: 1.5rem;
+            box-shadow: 0 12px 28px -10px rgba(0, 0, 0, 0.12);
+            padding: 1.5rem 1.2rem;
+            border: 1px solid rgba(44, 125, 160, 0.2);
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.3s, border-color 0.2s;
+        }
+
+        .sidebar-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 30px -12px rgba(44, 125, 160, 0.2);
+        }
+
+        .sidebar-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #1f2e3c;
+            margin-bottom: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            border-left: 4px solid #2c7da0;
+            padding-left: 0.8rem;
+            transition: color 0.2s, border-color 0.2s;
+        }
+
+        .sidebar-title i {
+            color: #2c7da0;
+            font-size: 1.3rem;
+        }
+
+        /* 社交链接样式 */
+        .social-link {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            background: #f1f5f9;
+            padding: 0.7rem 1rem;
+            border-radius: 60px;
+            margin-bottom: 1rem;
+            transition: all 0.2s;
+            text-decoration: none;
+            color: #1e2f3f;
+        }
+
+        .social-link i {
+            width: 1.6rem;
+            font-size: 1.3rem;
+            color: #2c7da0;
+        }
+
+        .social-link span {
+            flex: 1;
+            font-weight: 500;
+        }
+
+        .social-link:hover {
+            background: #e6edf4;
+            transform: translateX(4px);
+        }
+
+        .wechat-qr-small {
+            text-align: center;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #e2edf4;
+        }
+
+        .wechat-qr-small img {
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 12px;
+            border: 1px solid #e2edf7;
+            margin-bottom: 0.5rem;
+        }
+
+        .wechat-id {
+            font-size: 0.7rem;
+            color: #6c8eaa;
+            word-break: break-all;
+        }
+
+        /* 响应式 */
+        @media (max-width: 900px) {
+            .layout {
+                flex-direction: column;
+            }
+            .sidebar {
+                width: 100%;
+                position: static;
+                margin-top: 1rem;
+            }
+            body {
+                padding: 1.2rem;
+            }
+        }
+
+        /* 主卡片样式 */
         .card {
             background: rgba(255, 255, 255, 0.98);
-            backdrop-filter: blur(0px);
             border-radius: 2rem;
             box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
             overflow: hidden;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.3s, border 0.2s;
         }
 
         .card:hover {
@@ -42,12 +160,11 @@
             box-shadow: 0 28px 40px -16px rgba(0, 0, 0, 0.2);
         }
 
-        /* 内边距统一 */
         .card-inner {
             padding: 2rem 2rem 2rem 2rem;
         }
 
-        /* 头部区域: 头像 + 基本信息 (flex 响应式) */
+        /* 头部区域 */
         .profile-header {
             display: flex;
             flex-wrap: wrap;
@@ -56,6 +173,7 @@
             margin-bottom: 2.5rem;
             padding-bottom: 1.8rem;
             border-bottom: 2px solid #e9edf2;
+            transition: border-color 0.2s;
         }
 
         .avatar {
@@ -77,13 +195,7 @@
             transform: scale(1.02);
             box-shadow: 0 18px 28px -12px rgba(0, 0, 0, 0.3);
         }
-        .wechat_qr {
-            width: 150px;
-            height: 140px;
-            object-fit: cover;
-            border-radius: 12px;
-            border: 2px solid #e2edf7;
-        }
+
         .info {
             flex: 1;
         }
@@ -97,6 +209,7 @@
             -webkit-background-clip: text;
             color: transparent;
             margin-bottom: 0.5rem;
+            transition: background 0.2s;
         }
 
         .tagline {
@@ -107,6 +220,7 @@
             align-items: center;
             gap: 0.5rem;
             flex-wrap: wrap;
+            transition: color 0.2s;
         }
 
         .detail-list {
@@ -125,7 +239,7 @@
             border-radius: 60px;
             font-size: 0.9rem;
             color: #1e2f3f;
-            transition: background 0.2s;
+            transition: background 0.2s, color 0.2s;
         }
 
         .detail-item i {
@@ -138,7 +252,11 @@
             background: #e6edf4;
         }
 
-        /* 全局区块样式 */
+        .copy-tip {
+            cursor: pointer;
+        }
+
+        /* 全局区块 */
         .section {
             margin-bottom: 2.5rem;
         }
@@ -153,6 +271,7 @@
             border-left: 5px solid #2c7da0;
             padding-left: 1rem;
             color: #1e2f3f;
+            transition: color 0.2s, border-left-color 0.2s;
         }
 
         .section-title i {
@@ -160,7 +279,7 @@
             font-size: 1.4rem;
         }
 
-        /* 教育经历 卡片式时间轴 */
+        /* 教育经历卡片 */
         .education-grid {
             display: flex;
             flex-direction: column;
@@ -173,7 +292,7 @@
             padding: 1.2rem 1.5rem;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
             border: 1px solid #eef2f8;
-            transition: all 0.2s;
+            transition: all 0.2s, background 0.3s, border-color 0.2s;
         }
 
         .edu-card:hover {
@@ -186,6 +305,7 @@
             font-weight: 700;
             font-size: 1.2rem;
             color: #1f3b4c;
+            transition: color 0.2s;
         }
 
         .edu-school {
@@ -206,6 +326,7 @@
             padding: 0.2rem 0.7rem;
             border-radius: 20px;
             margin-top: 0.4rem;
+            transition: background 0.2s, color 0.2s;
         }
 
         .edu-desc {
@@ -213,15 +334,260 @@
             color: #2c4056;
             font-size: 0.9rem;
             line-height: 1.45;
+            transition: color 0.2s;
         }
 
-        /* 公众号专区 */
+        /* 技能标签区块（左侧） */
+        .skill-category {
+            margin-bottom: 1.5rem;
+        }
+        .skill-category-title {
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 0.8rem;
+            color: #1e2f3f;
+            background: #eef3fc;
+            display: inline-block;
+            padding: 0.3rem 1rem;
+            border-radius: 30px;
+            border-left: 3px solid #2c7da0;
+            transition: background 0.2s, color 0.2s;
+        }
+        .skill-category-title i {
+            margin-right: 0.5rem;
+            color: #2c7da0;
+        }
+        .skills-section {
+            margin-bottom: 2rem;
+        }
+
+        .skills-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.7rem;
+        }
+
+        .skill-badge {
+            font-size: 0.75rem;
+            background: #eef2f7;
+            padding: 0.3rem 0.9rem;
+            border-radius: 40px;
+            color: #1e3a4d;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            transition: all 0.2s;
+        }
+
+        .skill-badge i {
+            color: #2c7da0;
+            font-size: 0.75rem;
+        }
+
+        .skill-badge {
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+            transition: all 0.2s ease;
+        }
+        .skill-badge:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            background: #e6edf4;
+        }
+
+        /* 时间轴风格（科研&实习） */
+        .timeline-section {
+            margin: 1.8rem 0 0.5rem 0;
+        }
+
+        .timeline-item {
+            display: flex;
+            gap: 1.2rem;
+            margin-bottom: 1.8rem;
+            position: relative;
+        }
+
+        .timeline-left {
+            flex-shrink: 0;
+            width: 100px;
+            text-align: right;
+            padding-top: 0.2rem;
+        }
+
+        .timeline-date {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #2c7da0;
+            background: #eef3fc;
+            display: inline-block;
+            padding: 0.25rem 0.9rem;
+            border-radius: 30px;
+            letter-spacing: 0.3px;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .timeline-marker {
+            position: relative;
+            flex-shrink: 0;
+            width: 2px;
+            background: linear-gradient(180deg, #2c7da0, #a9d6e5, #caddf0);
+        }
+
+        .timeline-marker::before {
+            content: '';
+            position: absolute;
+            top: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 12px;
+            height: 12px;
+            background: #2c7da0;
+            border-radius: 50%;
+            border: 2px solid white;
+            box-shadow: 0 0 0 2px rgba(44, 125, 160, 0.2);
+            transition: all 0.2s;
+        }
+
+        .timeline-item:hover .timeline-marker::before {
+            background: #1f6e8c;
+            transform: translateX(-50%) scale(1.2);
+            box-shadow: 0 0 0 3px rgba(44, 125, 160, 0.3);
+        }
+
+        .timeline-content {
+            flex: 1;
+            background: #ffffff;
+            border-radius: 1rem;
+            padding: 1rem 1.4rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+            border: 1px solid #eef2f8;
+            transition: all 0.25s ease, background 0.3s, border-color 0.2s;
+            margin-bottom: 0.2rem;
+        }
+
+        .timeline-content:hover {
+            border-color: #cbdde9;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+            transform: translateX(2px);
+        }
+
+        .timeline-title {
+            font-size: 1.08rem;
+            font-weight: 700;
+            color: #1f2e3c;
+            margin-bottom: 0.2rem;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            transition: color 0.2s;
+        }
+
+        .timeline-title i {
+            color: #2c7da0;
+            font-size: 1rem;
+            width: 1.4rem;
+        }
+
+        .timeline-subtitle {
+            font-size: 0.82rem;
+            color: #2c7da0;
+            margin-bottom: 0.6rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            font-weight: 500;
+            background: #f5f9fe;
+            display: inline-flex;
+            padding: 0.2rem 0.8rem;
+            border-radius: 30px;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .timeline-subtitle i {
+            font-size: 0.75rem;
+        }
+
+        .timeline-desc {
+            font-size: 0.86rem;
+            color: #2c4056;
+            line-height: 1.55;
+            margin-top: 0.6rem;
+            padding-left: 0.2rem;
+            transition: color 0.2s;
+        }
+
+        .timeline-desc-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.6rem;
+            margin-bottom: 0.45rem;
+        }
+
+        .timeline-desc-item i {
+            color: #2c7da0;
+            font-size: 0.7rem;
+            margin-top: 0.25rem;
+            flex-shrink: 0;
+        }
+
+        .timeline-desc-item span {
+            flex: 1;
+        }
+
+        .timeline-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.8rem;
+        }
+
+        .timeline-tag {
+            font-size: 0.68rem;
+            background: #eef2f7;
+            padding: 0.2rem 0.7rem;
+            border-radius: 40px;
+            color: #2c7da0;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .timeline-tag:hover {
+            background: #e0eaf3;
+            transform: translateY(-1px);
+        }
+
+        @media (max-width: 680px) {
+            .timeline-item {
+                flex-direction: column;
+                gap: 0.5rem;
+                margin-bottom: 1.6rem;
+            }
+            .timeline-left {
+                width: auto;
+                text-align: left;
+                padding-left: 0.5rem;
+            }
+            .timeline-marker {
+                display: none;
+            }
+            .timeline-content {
+                margin-left: 0.5rem;
+            }
+            .timeline-title {
+                font-size: 1rem;
+            }
+        }
+
+        /* 公众号区块（左侧详细版） */
         .wechat-section {
             background: linear-gradient(115deg, #f8fafd 0%, #ffffff 100%);
             border-radius: 1.5rem;
             border: 1px solid #e2edf7;
             overflow: hidden;
             margin-top: 0.2rem;
+            transition: background 0.3s, border-color 0.2s;
         }
 
         .wechat-content {
@@ -244,6 +610,7 @@
             align-items: center;
             gap: 0.6rem;
             color: #1f2e3c;
+            transition: color 0.2s;
         }
 
         .wechat-name i {
@@ -255,63 +622,26 @@
             color: #4e6b87;
             margin: 0.5rem 0 0.9rem 0;
             font-size: 0.95rem;
-        }
-
-        .wechat-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.6rem;
-            background: #1f2e3c;
-            padding: 0.65rem 1.4rem;
-            border-radius: 60px;
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.2s ease;
-            margin-top: 0.3rem;
-            font-size: 0.9rem;
-        }
-
-        .wechat-link i {
-            font-size: 1rem;
-        }
-
-        .wechat-link:hover {
-            background: #2c7da0;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(44, 125, 160, 0.2);
+            transition: color 0.2s;
         }
 
         .qrcode-mock {
             flex: 0.6;
             min-width: 80px;
             text-align: center;
-            
             border-radius: 1rem;
             padding: 0.8rem;
-            backdrop-filter: blur(2px);
-            
         }
 
-        .qr-icon {
-            font-size: 0rem;
-            color: #2c7da0;
-            margin-bottom: 0.2rem;
+        .wechat_qr {
+            width: 150px;
+            height: 140px;
+            object-fit: cover;
+            border-radius: 12px;
+            border: 2px solid #e2edf7;
+            transition: border-color 0.2s;
         }
 
-        .qr-text {
-            font-size: 0.7rem;
-            color: #5f7f9e;
-            letter-spacing: 1px;
-        }
-
-        .mock-note {
-            font-size: 0.7rem;
-            color: #819ab3;
-            margin-top: 0.2rem;
-        }
-
-        /* 额外小提示 & footer */
         .footer {
             margin-top: 2rem;
             text-align: center;
@@ -323,13 +653,141 @@
             justify-content: center;
             gap: 1rem;
             flex-wrap: wrap;
+            transition: border-color 0.2s, color 0.2s;
+        }
+        .core-tech-stack {
+            margin-top: 0.25rem;
         }
 
-        /* 响应式调整 */
-        @media (max-width: 750px) {
-            body {
-                padding: 1.2rem;
+        /* 技能分类卡片容器 */
+        .core-tech-stack .tech-category {
+            background: #ffffff;
+            border-radius: 1.5rem;
+            padding: 1.2rem 1.5rem 1.5rem 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02), 0 1px 2px rgba(0, 0, 0, 0.03);
+            border: 1px solid #eef2f8;
+            transition: all 0.25s ease, background 0.3s, border-color 0.2s;
+        }
+
+        .core-tech-stack .tech-category:hover {
+            border-color: #cbdde9;
+            box-shadow: 0 12px 20px -12px rgba(0, 0, 0, 0.08);
+            transform: translateY(-2px);
+        }
+
+        /* 分类标题行 */
+        .core-tech-stack .tech-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1.2rem;
+            padding-bottom: 0.6rem;
+            /* border-bottom: 2px solid #eef2fa; */
+            transition: border-bottom-color 0.2s;
+        }
+
+        .core-tech-stack .tech-header i {
+            font-size: 1.25rem;
+            width: 2rem;
+            height: 2rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #eef3fc 0%, #e6edf6 100%);
+            border-radius: 1rem;
+            color: #2c7da0;
+            transition: background 0.2s;
+        }
+
+        .core-tech-stack .tech-header h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin: 0;
+            color: #1f2e3c;
+            letter-spacing: -0.2px;
+            transition: color 0.2s;
+        }
+        /* 让每个大项和它的技能标签在同一行 */
+        .core-tech-stack .tech-row {
+            display: flex;
+            align-items: center;      /* 垂直居中 */
+            gap: 1rem;                /* 大项与技能之间的间距 */
+            flex-wrap: wrap;          /* 手机屏幕窄时自动换行，技能标签会折到下面 */
+            margin-bottom: 1.2rem;    /* 行与行之间的间距，与原来的视觉一致 */
+        }
+
+        /* 调整大项样式：去掉原来的下边距，固定一个最小宽度 */
+        .core-tech-stack .tech-header {
+            margin-bottom: 0;          /* 原样式中可能有 margin-bottom，需要覆盖 */
+            min-width: 100px;          /* 保证大项区域足够宽，避免挤压 */
+        }
+
+        /* 技能网格占据剩余宽度，并保持原有标签排列 */
+        .core-tech-stack .skills-grid {
+            flex: 1;
+        }
+        /* 技能网格 — 保持与全局 .skills-grid 一致但增强样式 */
+        .core-tech-stack .skills-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.7rem 1rem;
+            align-items: center;
+        }
+
+        /* 技能标签 — 圆润、微光、悬停动画 */
+        .core-tech-stack .skill-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.55rem;
+            background: #f1f5f9;
+            padding: 0.45rem 1.2rem;
+            border-radius: 2.5rem;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #1e4468;
+            transition: all 0.2s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            border: 1px solid rgba(44, 125, 160, 0.08);
+            box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+            cursor: default;
+        }
+
+        .core-tech-stack .skill-badge i {
+            font-size: 0.9rem;
+            width: 1.2rem;
+            text-align: center;
+            color: #2c7da0;
+            transition: transform 0.1s ease;
+        }
+
+        .core-tech-stack .skill-badge:hover {
+            background: #e6edf6;
+            transform: translateY(-3px);
+            border-color: #cbdde9;
+            box-shadow: 0 8px 16px -10px rgba(0, 0, 0, 0.12);
+        }
+
+        .core-tech-stack .skill-badge:hover i {
+            transform: scale(1.05);
+            color: #1f6390;
+        }
+
+        /* 移动端微调 */
+        @media (max-width: 640px) {
+            .core-tech-stack .tech-category {
+                padding: 1rem 1rem 1.2rem;
+                margin-bottom: 1.2rem;
             }
+            .core-tech-stack .tech-header h3 {
+                font-size: 1rem;
+            }
+            .core-tech-stack .skill-badge {
+                padding: 0.35rem 1rem;
+                font-size: 0.78rem;
+                gap: 0.45rem;
+            }
+        }
+        @media (max-width: 750px) {
             .card-inner {
                 padding: 1.5rem;
             }
@@ -352,9 +810,6 @@
                 text-align: center;
                 padding: 1.2rem;
             }
-            .wechat-link {
-                justify-content: center;
-            }
             .qrcode-mock {
                 width: 70%;
                 margin: 0 auto;
@@ -375,156 +830,518 @@
             }
         }
 
-        /* 自定义按钮与点缀 */
-        .badge-icon {
-            background: #eef3fc;
-            border-radius: 30px;
-        }
-
         a {
             text-decoration: none;
         }
 
-        /* 联系电话点击可复制提示 (优雅小工具) */
-        .copy-tip {
-            cursor: pointer;
+        /* ========== 手动深色模式（通过 .dark-mode 类控制）========== */
+        .dark-mode body {
+            background: linear-gradient(145deg, #10161e 0%, #0a0f15 100%);
+            color: #e2e8f0;
         }
+        .dark-mode .card {
+            background: #1e293b;
+            box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.45);
+            border: 1px solid rgba(71, 85, 105, 0.5);
+        }
+        .dark-mode .sidebar-card {
+            background: #1e293b;
+            border-color: rgba(44, 125, 160, 0.4);
+            backdrop-filter: blur(4px);
+        }
+        .dark-mode .sidebar-title {
+            color: #cbd5e6;
+            border-left-color: #5fa7c2;
+        }
+        .dark-mode .social-link {
+            background: #2d3a4e;
+            color: #e2e8f0;
+        }
+        .dark-mode .social-link i {
+            color: #7ab3cc;
+        }
+        .dark-mode .social-link:hover {
+            background: #3b4a63;
+        }
+        .dark-mode .wechat-qr-small {
+            border-top-color: #334155;
+        }
+        .dark-mode .wechat-id {
+            color: #94a3b8;
+        }
+        .dark-mode .profile-header {
+            border-bottom-color: #2d3a4a;
+        }
+        .dark-mode .name {
+            background: linear-gradient(135deg, #d6e6ff, #a0c4e8);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+        .dark-mode .tagline {
+            color: #9bb4cf;
+        }
+        .dark-mode .detail-item {
+            background: #2d3a4e;
+            color: #e2e8f0;
+        }
+        .dark-mode .detail-item i {
+            color: #7ab3cc;
+        }
+        .dark-mode .detail-item:hover {
+            background: #3f506a;
+        }
+        .dark-mode .section-title {
+            color: #e2e8f0;
+            border-left-color: #5fa7c2;
+        }
+        .dark-mode .edu-card {
+            background: #253141;
+            border-color: #334155;
+        }
+        .dark-mode .edu-card:hover {
+            background: #2a3b4f;
+            border-color: #4b6a88;
+        }
+        .dark-mode .edu-degree {
+            color: #e2e8f0;
+        }
+        .dark-mode .edu-school {
+            color: #7ab3cc;
+        }
+        .dark-mode .edu-date {
+            background: #1e2f40;
+            color: #b9d0e8;
+        }
+        .dark-mode .edu-desc {
+            color: #cbd5e6;
+        }
+        .dark-mode .timeline-content {
+            background: #253141;
+            border-color: #334155;
+        }
+        .dark-mode .timeline-content:hover {
+            border-color: #5f7f9c;
+            background: #2a3b4f;
+        }
+        .dark-mode .timeline-title {
+            color: #e2e8f0;
+        }
+        .dark-mode .timeline-subtitle {
+            background: #1f3144;
+            color: #8bbcdb;
+        }
+        .dark-mode .timeline-desc {
+            color: #cbd5e6;
+        }
+        .dark-mode .timeline-tag {
+            background: #2d3a4e;
+            color: #9bc0da;
+        }
+        .dark-mode .timeline-tag:hover {
+            background: #3f506a;
+        }
+        .dark-mode .timeline-date {
+            background: #1f3144;
+            color: #8bbcdb;
+        }
+        .dark-mode .wechat-section {
+            background: #1e2a3a;
+            border-color: #334155;
+        }
+        .dark-mode .wechat-name {
+            color: #e2e8f0;
+        }
+        .dark-mode .wechat-bio {
+            color: #a0bbd6;
+        }
+        .dark-mode .wechat_qr {
+            border-color: #475569;
+        }
+        .dark-mode .footer {
+            border-top-color: #2d3a4a;
+            color: #94a3b8;
+        }
+        .dark-mode .skill-category-title {
+            background: #1f3144;
+            color: #cbd5e6;
+        }
+        .dark-mode .skill-badge {
+            background: #2d3a4e;
+            color: #e2e8f0;
+        }
+        .dark-mode .skill-badge i {
+            color: #8bbcdb;
+        }
+        .dark-mode .skill-badge:hover {
+            background: #3b4a63;
+        }
+        /* 针对核心技术栈内深色已定义，但补充部分边缘以确保一致性 */
+        .dark-mode .core-tech-stack .tech-category {
+            background: #1e2a3a;
+            border-color: #334155;
+        }
+        .dark-mode .core-tech-stack .tech-header {
+            border-bottom-color: #2d3a4a;
+        }
+        .dark-mode .core-tech-stack .tech-header i {
+            background: #2d3a5e;
+            color: #8bbcdb;
+        }
+        .dark-mode .core-tech-stack .tech-header h3 {
+            color: #e2e8f0;
+        }
+        .dark-mode .core-tech-stack .skill-badge {
+            background: #2d3a4e;
+            color: #e2e8f0;
+            border-color: #405a77;
+        }
+        .dark-mode .core-tech-stack .skill-badge i {
+            color: #8bbcdb;
+        }
+        .dark-mode .core-tech-stack .skill-badge:hover {
+            background: #3b4a63;
+            border-color: #6f8fae;
+        }
+        .dark-mode .core-tech-stack .skill-badge:hover i {
+            color: #b9def5;
+        }
+        /* 时间轴标记线在深色下调整 */
+        .dark-mode .timeline-marker {
+            background: linear-gradient(180deg, #5fa7c2, #2f5f7a, #1e3a4a);
+        }
+        .dark-mode .timeline-marker::before {
+            background: #5fa7c2;
+            box-shadow: 0 0 0 2px rgba(95, 167, 194, 0.3);
+            border-color: #1e293b;
+        }
+        .dark-mode .timeline-item:hover .timeline-marker::before {
+            background: #7ab3cc;
+            box-shadow: 0 0 0 3px rgba(122, 179, 204, 0.4);
+        }
+        .dark-mode .qr-text {
+            color: #9bb4cf;
+        }
+        .dark-mode .wechat-info .wechat-bio:last-child {
+            color: #a0bbd6;
+        }
+        .dark-mode .sidebar-card .social-link .fa-arrow-right {
+            color: #7ab3cc;
+        }
+
+        /* ========== 右下角主题切换按钮 ========== */
+        .theme-switch-btn {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            width: 86px;
+            height: 86px;
+            border-radius: 50%;
+            background: #ffffff;
+            border: none;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.4rem;
+            z-index: 1000;
+            transition: all 0.2s ease;
+            color: #1e2a3e;
+        }
+
+        .theme-switch-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        /* 深色模式下的按钮样式 */
+        .dark-mode .theme-switch-btn {
+            background: #2d3a4e;
+            color: #f0f3f8;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+        }
+        
     </style>
 </head>
 <body>
-<div class="container">
-    <div class="card">
-        <div class="card-inner">
-            <!-- 头部: 照片 + 个人信息 -->
-            <div class="profile-header">
-                <div class="avatar">
-                    <!-- 使用高清且稳定的随机肖像占位图 (可替换为真实照片) -->
-                    <img class="avatar-img" src="Image/my_picture.png" alt="李锦男 个人照片">
-                </div>
-                <div class="info">
-                    <div class="name">李锦男</div>
-                    <div class="tagline">
-                        <i class="fas fa-laptop-code" style="color:#2c7da0;"></i> 全栈开发者 · 技术创作者
+<div class="layout">
+    <!-- 左侧主要内容区 -->
+    <div class="main-content">
+        <div class="card">
+            <div class="card-inner">
+                <!-- 头部 -->
+                <div class="profile-header">
+                    <div class="avatar">
+                        <img class="avatar-img" src="Image/my_picture.png" alt="李锦男 个人照片">
                     </div>
-                    <div class="detail-list">
-                        <!-- 学校信息 (明确包含) -->
-                        <div class="detail-item">
-                            <i class="fas fa-graduation-cap"></i>
-                            <span>哈尔滨工程大学 · 电子信息工程</span>
+                    <div class="info">
+                        <div class="name">李锦男 Li Jinnan</div>
+                        <div class="tagline">
+                            <i class="fas fa-laptop-code" style="color:#2c7da0;"></i> 硬件与算法研究者 · 全栈开发者 · 浪漫主义者
                         </div>
-                        <!-- 电话号码 (明确包含) -->
-                        <div class="detail-item copy-tip" onclick="copyToClipboard('+86 185 1868 3677')" title="点击复制电话">
-                            <i class="fas fa-phone-alt"></i>
-                            <span>+86 185 1868 3677</span>
-                            <i class="fas fa-copy" style="font-size: 0.7rem; opacity: 0.7;"></i>
-                        </div>
-                        <!-- 可选邮箱 (提升完整度但不强制, 但让联系更友好) -->
-                        <div class="detail-item">
-                            <i class="fas fa-envelope"></i>
-                            <span>lijinnan@hrbeu.edu.cn</span>
+                        <div class="detail-list">
+                            <div class="detail-item">
+                                <i class="fas fa-graduation-cap"></i>
+                                <span>哈尔滨工程大学 · 电子信息工程</span>
+                            </div>
+                            <div class="detail-item copy-tip" onclick="copyToClipboard('+86 185 1868 3677')" title="点击复制电话">
+                                <i class="fab fa-weixin"></i>
+                                <i class="fas fa-phone-alt"></i>
+                                <span>+86 185 1868 3677</span>
+                                <i class="fas fa-copy" style="font-size: 0.7rem; opacity: 0.7;"></i>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-envelope"></i>
+                                <span>lijinnan@hrbeu.edu.cn</span>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- 教育经历区块 (丰富详细) -->
-            <div class="section">
-                <div class="section-title">
-                    <i class="fas fa-book-open"></i>
-                    <span>教育经历</span>
-                </div>
-                <div class="education-grid">
-                    <!-- <div class="edu-card">
-                        <div class="edu-degree">计算机科学与技术 硕士 (推免)</div>
-                        <div class="edu-school">
-                            <i class="fas fa-university"></i> 浙江大学 · 计算机学院
+                <!-- 教育经历 -->
+                <div class="section">
+                    <div class="section-title">
+                        <i class="fas fa-book-open"></i>
+                        <span>教育经历</span>
+                    </div>
+                    <div class="education-grid">
+                        <div class="edu-card">
+                            <div class="edu-degree">电子信息工程 本科在读</div>
+                            <div class="edu-school">
+                                <i class="fas fa-graduation-cap"></i> 哈尔滨工程大学 · 信息与通信工程学院
+                            </div>
+                            <div class="edu-date">2023 – 2027 | GPA 92/100</div>
+                            <div class="edu-desc">主修课程：数字电子技术（100）、微处理器与嵌入式系统设计（98）、通信电子线路（97）、信号与系统（96）、机械设计基础（98）、概率论与数理统计（97）、线性代数与解析几何（96）、工科数学分析（96）、数电实验（优秀）</div>
                         </div>
-                        <div class="edu-date">2024 – 至今 | 研究型硕士 (在读)</div>
-                        <div class="edu-desc">研究方向：智能软件工程、大模型应用。 导师：国家优青获得者，参与省级重点实验室项目。</div>
-                    </div> -->
-                    <div class="edu-card">
-                        <div class="edu-degree">信息与通信工程 本科</div>
-                        <div class="edu-school">
-                            <i class="fas fa-graduation-cap"></i> 哈尔滨工程大学 · 信息与通信工程学院 · 电子信息工程
-                        </div>
-                        <div class="edu-date">2023 – 2027 | GPA 92/100</div>
-                        <div class="edu-desc">主修课程：数字电子技术（100）、微处理器与嵌入式系统设计（98）、通信电子线路（97）、信号与系统（96）、机械
-设计基础（98）、概率论与数理统计（97）、线性代数与解析几何（96）、工科数学分析（96）、数电实验（优秀）</div>
                     </div>
                 </div>
-            </div>
 
-            <!-- 公众号网站区块 (完全满足“公众号网站”需求，包含链接与形象展示) -->
-            <div class="section">
-                <div class="section-title">
-                    <i class="fab fa-weixin"></i>
-                    <span>公众号 · 原创空间</span>
-                </div>
-                <div class="wechat-section">
-                    <div class="wechat-content">
-                        <div class="wechat-info">
-                            <div class="wechat-name">
-                                <i class="fab fa-weixin"></i> 萨维亚萨钦
+                <!-- 核心技术栈 -->
+                <div class="section core-tech-stack">
+                    <div class="section-title">
+                        <i class="fas fa-cubes"></i>
+                        <span>核心技术栈</span>
+                    </div>
+
+                    <div class="tech-category">
+                        <!-- 科研工具 -->
+                        <div class="tech-row">
+                            <div class="tech-header">
+                                <i class="fas fa-flask"></i>
+                                <h3>科研工具</h3>
                             </div>
-                            <div class="wechat-bio">
-                                🌟 前沿技术、算法心得与项目时间 | 每周更新深度文章
-                            </div>
-                            <div class="wechat-bio">
-                                ☕ 好书精读、感悟分享与个人成长 | 随缘更新有趣内容
-                            </div>
-                            
-                            <div style="font-size:0.7rem; margin-top:0.5rem; color:#6c8eaa;">
-                                🔗 公众号ID: gh_b3a2d3010bd9
+                            <div class="skills-grid">
+                                <span class="skill-badge"><i class="fas fa-chart-line"></i> MATLAB</span>
+                                <span class="skill-badge"><i class="fas fa-code-branch"></i> Simulink</span>
+                                <span class="skill-badge"><i class="fas fa-chart-pie"></i> Origin</span>
+                                <span class="skill-badge"><i class="fas fa-file-alt"></i> LaTeX</span>
                             </div>
                         </div>
-                        <div class="qrcode-mock">
-                            <div class="qr-icon">
+
+                        <!-- IC / FPGA -->
+                        <div class="tech-row">
+                            <div class="tech-header">
+                                <i class="fas fa-microchip"></i>
+                                <h3>IC / FPGA</h3>
+                            </div>
+                            <div class="skills-grid">
+                                <span class="skill-badge"><i class="fas fa-cog"></i> Vivado</span>
+                                <span class="skill-badge"><i class="fas fa-bolt"></i> Verilog</span>
+                                <span class="skill-badge"><i class="fas fa-cube"></i> RISC-V</span>
+                                <span class="skill-badge"><i class="fas fa-gem"></i> Chisel</span>
+                            </div>
+                        </div>
+
+                        <!-- 单板硬件 -->
+                        <div class="tech-row">
+                            <div class="tech-header">
+                                <i class="fas fa-plug"></i>
+                                <h3>单板硬件</h3>
+                            </div>
+                            <div class="skills-grid">
+                                <span class="skill-badge"><i class="fas fa-project-diagram"></i> Cadence Allegro</span>
+                                <span class="skill-badge"><i class="fas fa-layer-group"></i> Altium Designer</span>
+                                <span class="skill-badge"><i class="fas fa-dove"></i> 立创EDA</span>
+                            </div>
+                        </div>
+
+                        <!-- 嵌入式 -->
+                        <div class="tech-row">
+                            <div class="tech-header">
+                                <i class="fas fa-terminal"></i>
+                                <h3>嵌入式</h3>
+                            </div>
+                            <div class="skills-grid">
+                                <span class="skill-badge"><i class="fab fa-python"></i> Python</span>
+                                <span class="skill-badge"><i class="fas fa-code"></i> C/C++</span>
+                                <span class="skill-badge"><i class="fas fa-microchip"></i> STM32</span>
+                                <span class="skill-badge"><i class="fas fa-eye"></i> OpenCV</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 科研经历 -->
+                <div class="section">
+                    <div class="section-title">
+                        <i class="fas fa-flask"></i>
+                        <span>科研经历</span>
+                    </div>
+                    <div class="timeline-section">
+                        <div class="timeline-item">
+                            <div class="timeline-left"><span class="timeline-date">2025.10 – 至今</span></div>
+                            <div class="timeline-marker"></div>
+                            <div class="timeline-content">
+                                <div class="timeline-title"><i class="fas fa-microchip"></i> 基于关键少数法则中头狼追逐灰狼优化算法的红外热成像普朗克发射率反演与测温技术</div>
+                                <div class="timeline-subtitle"><i class="fas fa-university"></i> 哈尔滨工程大学 · 先进船舶通信与信息技术工业和信息化部重点实验室 · 第一作者</div>
+                                <div class="timeline-desc">
+                                    <div class="timeline-desc-item"><i class="fas fa-angle-right"></i><span>针对多光谱环境下实现无接触温度测量与材料发射率反演；</span></div>
+                                    <div class="timeline-desc-item"><i class="fas fa-angle-right"></i><span>改进灰狼优化算法（GWO），增加关键少数法则与追逐机制，提高算法收敛速度和精炼能力；</span></div>
+                                    <div class="timeline-desc-item"><i class="fas fa-angle-right"></i><span>相关成果投稿中，已申请一项发明专利（送审阶段）。</span></div>
+                                </div>
+                                <div class="timeline-tags"><span class="timeline-tag">辐射测温</span><span class="timeline-tag">群智优化算法</span><span class="timeline-tag">Matlab</span></div>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-left"><span class="timeline-date">2026.4 – 至今</span></div>
+                            <div class="timeline-marker"></div>
+                            <div class="timeline-content">
+                                <div class="timeline-title"><i class="fas fa-temperature-high"></i> 基于种群熵量子野生燕麦搜索机制的雾计算服务器资源分配方法</div>
+                                <div class="timeline-subtitle"><i class="fas fa-flask"></i> 哈尔滨工程大学 · 高精度卫星导航及海洋应用黑龙江省重点实验室 · 第一作者</div>
+                                <div class="timeline-desc">
+                                    <div class="timeline-desc-item"><i class="fas fa-angle-right"></i><span>主导使用 MATLAB 编程，构建由雾计算服务器、物联网用户、窃听器的复杂通信网络系统；</span></div>
+                                    <div class="timeline-desc-item"><i class="fas fa-angle-right"></i><span>利用野生燕麦优化算法、量子演化理论和熵优化方法，实现在多窃听器状态下通过资源调配的方式提升系统保密速率、保证低传输时延。</span></div>
+                                </div>
+                                <div class="timeline-tags"><span class="timeline-tag">群智能优化</span><span class="timeline-tag">物联网</span><span class="timeline-tag">Matlab</span><span class="timeline-tag">资源分配</span></div>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-left"><span class="timeline-date">2024.10 – 2025.5</span></div>
+                            <div class="timeline-marker"></div>
+                            <div class="timeline-content">
+                                <div class="timeline-title"><i class="fas fa-code"></i> 基于视觉图像编码的单轴中空双编码器关节电机</div>
+                                <div class="timeline-subtitle"><i class="fas fa-microchip"></i> 哈尔滨工程大学智能科学与工程学院 · 核心成员</div>
+                                <div class="timeline-desc">
+                                    <div class="timeline-desc-item"><i class="fas fa-angle-right"></i><span>利用 OpenCV 框架读取条形码以及偏移量、二阶条纹码编码混合识别实现小角度识别、提升识别的精度，误差＜0.3%；</span></div>
+                                    <div class="timeline-desc-item"><i class="fas fa-angle-right"></i><span>利用串口通信将结果导入 STM32 单片机中并利用 pid 算法实现高精度控制；</span></div>
+                                    <div class="timeline-desc-item"><i class="fas fa-angle-right"></i><span>国家级大学生创新创业训练计划重点支持项目已结题。</span></div>
+                                </div>
+                                <div class="timeline-tags"><span class="timeline-tag">OpenCV</span><span class="timeline-tag">STM32</span><span class="timeline-tag">C语言</span><span class="timeline-tag">图像处理</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 实习经历 -->
+                <div class="section">
+                    <div class="section-title">
+                        <i class="fas fa-briefcase"></i>
+                        <span>实习经历</span>
+                    </div>
+                    <div class="timeline-section">
+                        <div class="timeline-item">
+                            <div class="timeline-left"><span class="timeline-date">2024.06 – 2024.09</span></div>
+                            <div class="timeline-marker"></div>
+                            <div class="timeline-content">
+                                <div class="timeline-title"><i class="fas fa-cloud"></i> LayOut实习生</div>
+                                <div class="timeline-subtitle"><i class="fab fa-huawei"></i> 一博科技股份有限公司 · 北京开发部</div>
+                                <div class="timeline-desc">
+                                    <div class="timeline-desc-item"><i class="fas fa-angle-right"></i><span>参与使用 Cadence Allegro EDA 软件与 SI9000 等参数计算工具进行 PCB 电路板的绘制以及元器件封装库的建模；</span></div>
+                                    <div class="timeline-desc-item"><i class="fas fa-angle-right"></i><span>参与对 56+Gbps 高速电路板信号与电源完整性的分析与方针；</span></div>
+                                    <div class="timeline-desc-item"><i class="fas fa-angle-right"></i><span>协助团队对设计和生产中发生的事故经验进行总结和整理。</span></div>
+                                </div>
+                                <div class="timeline-tags"><span class="timeline-tag">单板硬件</span><span class="timeline-tag">PCB Layout</span><span class="timeline-tag">封装建模</span><span class="timeline-tag">硬件仿真</span></div>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-left"><span class="timeline-date">2026.01 – 2026.7</span></div>
+                            <div class="timeline-marker"></div>
+                            <div class="timeline-content">
+                                <div class="timeline-title"><i class="fas fa-microchip"></i> FPGA开发工程师</div>
+                                <div class="timeline-subtitle"><i class="fas fa-chart-line"></i> 北京市玄紫科技有限公司</div>
+                                <div class="timeline-desc">
+                                    <div class="timeline-desc-item"><i class="fas fa-angle-right"></i><span>参与使用Artix-7系列FPGA构建服务器CPU的开发与优化。</span></div>
+                                    <div class="timeline-desc-item"><i class="fas fa-angle-right"></i><span>实现基于FPGA的并行计算框架，提升数据分拣与存储效率约30%。</span></div>
+                                    <div class="timeline-desc-item"><i class="fas fa-angle-right"></i><span>实现GZip压缩算法的FPGA硬件加速实现，提高边缘计算性能。</span></div>
+                                </div>
+                                <div class="timeline-tags"><span class="timeline-tag">Verilog</span><span class="timeline-tag">FPGA</span><span class="timeline-tag">边缘计算</span><span class="timeline-tag">RTL</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 公众号区块 -->
+                <div class="section">
+                    <div class="section-title">
+                        <i class="fab fa-weixin"></i>
+                        <span>公众号 · 原创空间</span>
+                    </div>
+                    <div class="wechat-section">
+                        <div class="wechat-content">
+                            <div class="wechat-info">
+                                <div class="wechat-name"><i class="fab fa-weixin"></i> 萨维亚萨钦</div>
+                                <div class="wechat-bio">🌟 前沿技术、算法心得与项目实践 | 每周更新深度文章</div>
+                                <div class="wechat-bio">☕ 好书精读、感悟分享与个人成长 | 随缘更新有趣内容</div>
+                                <div style="font-size:0.7rem; margin-top:0.5rem; color:#6c8eaa;">🔗 公众号ID: gh_b3a2d3010bd9</div>
+                            </div>
+                            <div class="qrcode-mock">
                                 <img class="wechat_qr" src="Image/wechat_qr.jpg" alt="李锦男 个人公众号二维码">
+                                <div class="qr-text" style="margin-top: 0.3rem;">扫码关注</div>
                             </div>
-                            <div class="qr-text">扫码关注微信公众号</div>
-                            <!-- <div class="mock-note">[ 公众号二维码 | 微信内长按 ]</div> -->
                         </div>
                     </div>
-                    <!-- 补充说明：公众号内容与文章精选快捷入口 -->
-                    <div style="padding: 0.6rem 1.8rem 1.2rem 1.8rem; border-top: 1px solid #eaf0f6; display: flex; gap: 1rem; flex-wrap: wrap; justify-content: space-between; align-items: center;">
-                        <span style="font-size: 0.8rem; color:#4e6b87;"><i class="far fa-newspaper"></i> 近期热读: 《有源低通滤波器示例》 · 《在行动与弃绝之间：薄伽梵歌的永恒悖论与现代人的精神困境》</span>
-                        <span style="font-size: 0.75rem; background:#eef3fa; padding:0.2rem 0.7rem; border-radius:20px;">⭐ 50+ 技术人关注</span>
-                    </div>
                 </div>
-                <!-- 温馨提示: 实际公众号网站链接可替换为自己的真实地址 -->
-                <p style="font-size: 0.7rem; margin-top: 0.6rem; color: #819ab3; text-align: right;">
-                    <i class="fas fa-info-circle"></i> 公众号网站链接跳转至我的技术博客/公众号聚合页
-                </p>
-            </div>
 
-            <!-- 小彩蛋: 技能标签 (额外但不干扰主要信息，增强专业度) -->
-            <div style="margin-top: 0.5rem;">
-                <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center;">
-                    <span style="font-size:0.75rem; background:#eef2f7; padding:0.2rem 0.8rem; border-radius:40px;"><i class="fas fa-microchip"></i> Verilog</span>
-                    <span style="font-size:0.75rem; background:#eef2f7; padding:0.2rem 0.8rem; border-radius:40px;"><i class="fab fa-python"></i> Python</span>
-                    <span style="font-size:0.75rem; background:#eef2f7; padding:0.2rem 0.8rem; border-radius:40px;"><i class="fas fa-microchip"></i> 单板硬件</span>
-                    <span style="font-size:0.75rem; background:#eef2f7; padding:0.2rem 0.8rem; border-radius:40px;"><i class="fas fa-network-wired"></i> 边缘计算</span>
-                    <span style="font-size:0.75rem; background:#eef2f7; padding:0.2rem 0.8rem; border-radius:40px;"><i class="fas fa-eye"></i> OpenCV</span>
-                    <span style="font-size:0.75rem; background:#eef2f7; padding:0.2rem 0.8rem; border-radius:40px;"><i class="fas fa-brain"></i> 群智能优化</span>
-                    <span style="font-size:0.75rem; background:#eef2f7; padding:0.2rem 0.8rem; border-radius:40px;"><i class="fas fa-temperature-high"></i> 辐射测温</span>
+                <!-- 页脚 -->
+                <div class="footer">
+                    <span><i class="far fa-copyright"></i> 2026 李锦男 · 灵感与创造</span>
+                    <span><i class="fas fa-sync-alt"></i> 持续更新中</span>
+                    <span><i class="fas fa-shield-alt"></i> 一切内容真实可溯</span>
                 </div>
             </div>
+        </div>
+    </div>
 
-            <div class="footer">
-                <span><i class="far fa-copyright"></i> 2026 李锦男 · 灵感与创造</span>
-                <span><i class="fas fa-sync-alt"></i> 持续更新中</span>
-                <span><i class="fas fa-shield-alt"></i> 一切内容真实可溯</span>
+    <!-- 右侧悬浮窗 -->
+    <div class="sidebar">
+        <div class="sidebar-card">
+            <div class="sidebar-title">
+                <i class="fas fa-link"></i> 联系与关注我
+            </div>
+            <a href="https://weixin.qq.com/r/xxx" target="_blank" class="social-link" id="wechatLink">
+                <i class="fab fa-weixin"></i>
+                <span>微信公众号</span>
+                <i class="fas fa-arrow-right" style="font-size: 0.8rem;"></i>
+            </a>
+            <a href="https://github.com/NanNan-13" target="_blank" class="social-link">
+                <i class="fab fa-github"></i>
+                <span>GitHub</span>
+                <i class="fas fa-arrow-right" style="font-size: 0.8rem;"></i>
+            </a>
+            <a href="https://space.bilibili.com/3546632964540690" target="_blank" class="social-link">
+                <i class="fab fa-bilibili"></i>
+                <span>BiliBili</span>
+                <i class="fas fa-arrow-right" style="font-size: 0.8rem;"></i>
+            </a>
+            <div class="wechat-qr-small">
+                <img src="Image/wechat_qr.jpg" alt="公众号二维码">
+                <div class="wechat-id">公众号ID: gh_b3a2d3010bd9</div>
+                <div style="font-size:0.65rem; margin-top:0.3rem;">扫码或搜ID关注</div>
             </div>
         </div>
     </div>
 </div>
 
-<!-- 简单的js实现电话复制 + 公众号网站链接动态友好提示 (无侵入) -->
+<!-- 右下角主题切换按钮 -->
+<button id="theme-toggle" class="theme-switch-btn" aria-label="切换白天黑夜模式">
+    <i class="fas fa-moon"></i>
+</button>
+
 <script>
-    // 电话复制功能 (提升交互)
+    // 电话复制功能
     function copyToClipboard(text) {
         navigator.clipboard.writeText(text).then(() => {
-            // 临时小提示
             let tip = document.createElement('div');
             tip.innerText = '✅ 电话号码已复制: ' + text;
             tip.style.position = 'fixed';
@@ -540,39 +1357,62 @@
             tip.style.boxShadow = '0 4px 12px rgba(0,0,0,0.2)';
             tip.style.backdropFilter = 'blur(4px)';
             document.body.appendChild(tip);
-            setTimeout(() => {
-                tip.remove();
-            }, 1800);
+            setTimeout(() => { tip.remove(); }, 1800);
         }).catch(() => {
             alert('手动复制: ' + text);
         });
     }
 
-    // 增强公众号网站链接的演示性：点击时显示示例引导，实际使用可替换成真实地址
-    const wechatLink = document.getElementById('wechatSiteLink');
+    // 微信公众号链接提示
+    const wechatLink = document.getElementById('wechatLink');
     if (wechatLink) {
         wechatLink.addEventListener('click', (e) => {
             e.preventDefault();
-            // 模拟跳转到公众号官方聚合页/官网（这里可替换成个人真实公众号网站链接）
-            // 为了演示，打开一个新页面展示公众号相关内容的占位信息（新窗口打开模拟站点）
-            // 同时满足“公众号网站”可访问性要求，且不干扰用户体验
-            const fakeUrl = 'https://example.com/wechat-official?from=mingxuan';
-            // 提示用户可替换为自己的公众号网站链接，同时模拟新窗口打开
-            const userConfirmed = confirm('🚀 当前为演示个人网站，公众号网站示例地址：\n' + fakeUrl + '\n\n点击“确定”体验模拟跳转 (实际可修改为您的真实公众号链接/官网)');
-            if (userConfirmed) {
-                window.open('https://mingxuan.dev/demo-wechat', '_blank');
-                // 优雅降级：由于真实部署时用户可把链接替换成自己的公众号网站，我们只做演示
-                // 控制台输出提示
-                console.log('💡 提示: 部署时可将 #wechatSiteLink 的 href 替换为您真实的公众号网站地址');
-            }
+            alert('公众号ID: gh_b3a2d3010bd9\n可在微信中搜索关注');
         });
     }
 
-    // 附加说明: 保证所有关键元素包含：照片、姓名、学校、电话、教育经历、公众号网站（链接）
-    // 学校除了在详情区展示外，也在教育经历部分强化，满足完整性；电话显示完整并提供复制。
-    // 公众号网站链接明确标识为“访问公众号官网”，并且公众号区块具有二维码概念与网站入口，完全符合要求。
-    // 同时页脚确保现代感，照片源自稳定API可替换。
-    console.log('个人网站已加载 — 包含照片、姓名(陈明轩)、学校(浙江大学)、电话、教育经历及公众号网站');
+    // ========== 主题切换逻辑（手动 + 存储） ==========
+    const toggleBtn = document.getElementById('theme-toggle');
+    const htmlEl = document.documentElement;
+
+    // 获取本地存储的主题，如果没有则根据系统偏好决定初始状态
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+        htmlEl.classList.add('dark-mode');
+        toggleBtn.innerHTML = '<i class="fas fa-sun"></i>';
+    } else if (savedTheme === 'light') {
+        htmlEl.classList.remove('dark-mode');
+        toggleBtn.innerHTML = '<i class="fas fa-moon"></i>';
+    } else {
+        // 第一次访问：跟随系统偏好
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            htmlEl.classList.add('dark-mode');
+            toggleBtn.innerHTML = '<i class="fas fa-sun"></i>';
+            localStorage.setItem('theme', 'dark');
+        } else {
+            htmlEl.classList.remove('dark-mode');
+            toggleBtn.innerHTML = '<i class="fas fa-moon"></i>';
+            localStorage.setItem('theme', 'light');
+        }
+    }
+
+    // 切换函数
+    function toggleTheme() {
+        if (htmlEl.classList.contains('dark-mode')) {
+            htmlEl.classList.remove('dark-mode');
+            localStorage.setItem('theme', 'light');
+            toggleBtn.innerHTML = '<i class="fas fa-moon"></i>';
+        } else {
+            htmlEl.classList.add('dark-mode');
+            localStorage.setItem('theme', 'dark');
+            toggleBtn.innerHTML = '<i class="fas fa-sun"></i>';
+        }
+    }
+
+    toggleBtn.addEventListener('click', toggleTheme);
+
+    console.log('个人网站已加载 — 支持手动切换主题，设置已保存');
 </script>
 </body>
 </html>
