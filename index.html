@@ -208,8 +208,15 @@
             background-clip: text;
             -webkit-background-clip: text;
             color: transparent;
-            margin-bottom: 0.5rem;
             transition: background 0.2s;
+        }
+
+        .name-row {
+            display: flex;
+            align-items: center;
+            gap: 0.9rem;
+            flex-wrap: wrap;
+            margin-bottom: 0.5rem;
         }
 
         .tagline {
@@ -1111,12 +1118,11 @@
         .resume-btn {
             display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
-            margin-top: 0.6rem;
-            padding: 0.5rem 1.3rem;
+            gap: 0.45rem;
+            padding: 0.42rem 1.1rem;
             background: linear-gradient(135deg, #2c7da0, #468faf);
             color: #ffffff;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             font-weight: 600;
             letter-spacing: 0.02em;
             border: none;
@@ -1167,14 +1173,16 @@
                         <img class="avatar-img" src="Image/my_picture.png" alt="李锦男 个人照片">
                     </div>
                     <div class="info">
-                        <div class="name">李锦男 Li Jinnan</div>
+                        <div class="name-row">
+                            <div class="name">李锦男 Li Jinnan</div>
+                            <a href="CV/李锦男简历2026.08.pdf" download="李锦男简历.pdf" class="resume-btn">
+                                <i class="fas fa-file-download"></i>
+                                <span>下载简历 PDF</span>
+                            </a>
+                        </div>
                         <div class="tagline">
                             <i class="fas fa-laptop-code" style="color:#2c7da0;"></i> 硬件与算法研究者 · 全栈开发者 · 浪漫主义者
                         </div>
-                        <a href="CV/李锦男简历2026.08.pdf" download="李锦男简历.pdf" class="resume-btn">
-                            <i class="fas fa-file-download"></i>
-                            <span>下载简历 PDF</span>
-                        </a>
                         <div class="detail-list">
                             
                             <div class="detail-item copy-tip" onclick="copyToClipboard('+86 185 1868 3677')" title="点击复制电话">
