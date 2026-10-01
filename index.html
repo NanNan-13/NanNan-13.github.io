@@ -1106,7 +1106,53 @@
             color: #f0f3f8;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
         }
-        
+
+        /* ===== 下载简历按钮 ===== */
+        .resume-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 0.6rem;
+            padding: 0.5rem 1.3rem;
+            background: linear-gradient(135deg, #2c7da0, #468faf);
+            color: #ffffff;
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+            border: none;
+            border-radius: 40px;
+            cursor: pointer;
+            text-decoration: none;
+            box-shadow: 0 3px 10px rgba(44, 125, 160, 0.35);
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+        }
+
+        .resume-btn i {
+            font-size: 0.85rem;
+        }
+
+        .resume-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(44, 125, 160, 0.45);
+            background: linear-gradient(135deg, #256b89, #3b7e9c);
+            color: #ffffff;
+        }
+
+        .resume-btn:active {
+            transform: translateY(0);
+        }
+
+        /* 深色模式下的下载简历按钮 */
+        .dark-mode .resume-btn {
+            background: linear-gradient(135deg, #3a8ab0, #4f9ec2);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.4);
+        }
+
+        .dark-mode .resume-btn:hover {
+            background: linear-gradient(135deg, #2f7a9e, #448eb2);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5);
+        }
+
     </style>
 </head>
 <body>
@@ -1125,6 +1171,10 @@
                         <div class="tagline">
                             <i class="fas fa-laptop-code" style="color:#2c7da0;"></i> 硬件与算法研究者 · 全栈开发者 · 浪漫主义者
                         </div>
+                        <a href="CV/李锦男简历2026.08.pdf" download="李锦男简历.pdf" class="resume-btn">
+                            <i class="fas fa-file-download"></i>
+                            <span>下载简历 PDF</span>
+                        </a>
                         <div class="detail-list">
                             
                             <div class="detail-item copy-tip" onclick="copyToClipboard('+86 185 1868 3677')" title="点击复制电话">
@@ -1240,7 +1290,7 @@
                         <div class="tech-row">
                             <div class="tech-header">
                                 <i class="fas fa-microchip"></i>
-                                <h3>IC / FPGA</h3>
+                                <h3>逻辑设计</h3>
                             </div>
                             <div class="skills-grid">
                                 <span class="skill-badge"><i class="fas fa-cog"></i> Vivado</span>
@@ -1463,6 +1513,11 @@
             <div class="sidebar-title">
                 <i class="fas fa-link"></i> 联系与关注我
             </div>
+            <a href="CV/李锦男简历2026.08.pdf" download="李锦男简历.pdf" class="social-link">
+                <i class="fas fa-file-pdf"></i>
+                <span>下载简历</span>
+                <i class="fas fa-arrow-right" style="font-size: 0.8rem;"></i>
+            </a>
             <a href="https://weixin.qq.com/r/xxx" target="_blank" class="social-link" id="wechatLink">
                 <i class="fab fa-weixin"></i>
                 <span>微信公众号</span>
