@@ -1,0 +1,8 @@
+{
+  "cv_dir": "CV",
+  "docx_pattern": "*.docx",
+  "skip_prefix": "~$",
+  "branch": "main",
+  "push_after_commit": true,
+  "extra_add_paths": ["upload_cv.py", "cv_upload.json"]
+}
