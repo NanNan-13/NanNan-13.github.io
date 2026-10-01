@@ -1,9 +1,0 @@
-# IDE 配置目录
-.idea/
-
-# Python 缓存
-__pycache__/
-*.pyc
-
-# Word 临时文件
-~$*
